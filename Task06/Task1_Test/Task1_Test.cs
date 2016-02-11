@@ -29,6 +29,7 @@ namespace Task1_Test
 		public void CountPeople1()
 		{
 			People P = new People();
+			P.Count();
 			Assert.AreEqual(1, P.Print());
 		}
 
@@ -36,6 +37,7 @@ namespace Task1_Test
 		public void CountPeople2()
 		{
 			People P = new People(10);
+			P.Count();
 			Assert.AreEqual(5, P.Print());
 		}
 	}
