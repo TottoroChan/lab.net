@@ -30,8 +30,7 @@ namespace Task3
 				data = new T[Capacity];
 			}
 			else
-				throw new ArgumentOutOfRangeException("Capacity", 
-					"Вместимость списка должна быть натуральным числом.");
+				throw new ArgumentOutOfRangeException("Вместимость списка должна быть натуральным числом.");
 		}
 
 		/// <summary>
@@ -106,8 +105,7 @@ namespace Task3
 		{
 			if (id >= Length)
 			{
-				throw new ArgumentOutOfRangeException("Capacity",
-								"Индекс превышает длину массива");
+				throw new ArgumentOutOfRangeException("Индекс превышает длину массива");
 			}
 			else if (Length != Capacity)
 			{

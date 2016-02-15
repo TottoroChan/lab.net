@@ -59,7 +59,7 @@
       <Project>{2c2d4194-9713-41ca-82ad-ba98983efae8}</Project>
       <Name>Task1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Task31\Task3.csproj">
+    <ProjectReference Include="..\Task3\Task3.csproj">
       <Project>{46c99be3-6d4d-4527-9be6-08c6fe0b0f55}</Project>
       <Name>Task3</Name>
     </ProjectReference>
