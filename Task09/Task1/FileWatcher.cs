@@ -34,11 +34,11 @@ namespace Task1
 			TextWatcher.NotifyFilter =
 			   NotifyFilters.LastWrite | NotifyFilters.Size;
 			TextWatcher.Changed += new FileSystemEventHandler
-													(OnChanged);
+								(OnChanged);
 			TextWatcher.Created += new FileSystemEventHandler
-													(OnChanged);
+								(OnChanged);
 			TextWatcher.Deleted += new FileSystemEventHandler
-													(OnChanged);
+								(OnChanged);
 			TextWatcher.EnableRaisingEvents = true;
 			Console.WriteLine(">>>Нажмите \'0\' чтобы завершить наблюдение.");
 			while (Console.Read() != '0') ;
@@ -64,7 +64,7 @@ namespace Task1
 			for (int i = 0; i < txtfiles.Length; i++) 
 				for (int j = i + 1; j<txtfiles.Length; j++)
 				{
-					if(txtfiles[i].LastWriteTime < txtfiles[j].LastWriteTime)
+					if(txtfiles[i].LastWriteTime > txtfiles[j].LastWriteTime)
 					{
 						FileInfo temp = txtfiles[i];
 						txtfiles[i] = txtfiles[j];
