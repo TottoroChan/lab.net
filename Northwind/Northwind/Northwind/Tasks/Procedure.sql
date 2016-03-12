@@ -50,4 +50,34 @@ END
 GO
 
 --13.3
-
+CREATE PROCEDURE Northwind.SubordinationInfo
+	@id int
+AS
+BEGIN
+DECLARE @name nvarchar(40)
+SET @name = 
+(SELECT FirstName +' '+ LastName 
+FROM Northwind.Employees
+WHERE EmployeeID = @id)
+PRINT @name
+DECLARE @SubOrdinators int 
+SET @SubOrdinators = (SELECT COUNT(EmployeeID)  
+FROM Northwind.Employees
+WHERE ReportsTo = @id)
+PRINT N'---Subordinators---'
+DECLARE @Sub int
+SET @Sub = 1
+DECLARE @SubName nvarchar(40)
+WHILE @Sub <= @SubOrdinators
+BEGIN    
+SET @SubName =
+(SELECT TOP(1) FirstName +' '+ LastName 
+FROM Northwind.Employees
+WHERE EmployeeID IN (SELECT TOP(@Sub) EmployeeID 
+FROM  Northwind.Employees
+ORDER BY EmployeeID DESC)
+ORDER BY EmployeeID ASC)
+SET @Sub = @Sub + 1                    
+PRINT @SubName
+END
+END
