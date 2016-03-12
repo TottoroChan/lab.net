@@ -122,8 +122,6 @@
     <Folder Include="Schema Objects\Schemas\Northwind\Programmability\Types\User Defined Types CLR" />
     <Folder Include="Schema Objects\Schemas\Northwind\Programmability\Types\User Defined Table Types" />
     <Folder Include="Schema Objects\Schemas\Northwind\Programmability\Types\XML Schema Collections" />
-    <Folder Include="Schema Objects\Schemas\Northwind\Service Broker" />
-    <Folder Include="Schema Objects\Schemas\Northwind\Service Broker\Queues" />
     <Folder Include="Schema Objects\Schemas\Northwind\Synonyms" />
     <Folder Include="Schema Objects\Schemas\Northwind\Tables" />
     <Folder Include="Schema Objects\Schemas\Northwind\Tables\Constraints" />
@@ -166,6 +164,8 @@
     <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Catalogs\" />
     <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions\" />
     <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes\" />
+    <Folder Include="Tasks\Service Broker" />
+    <Folder Include="Tasks\Service Broker\Queues" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -205,6 +205,7 @@
       <SubType>NotInBuild</SubType>
     </None>
     <None Include="Tasks\Query.sql" />
+    <None Include="Tasks\Procedure.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -517,7 +518,6 @@
     <None Include="Tasks\Task_10.1.sql" />
     <None Include="Tasks\Task_11.1.sql" />
     <None Include="Tasks\Task_12.1.sql" />
-    <None Include="Tasks\Procedure.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />
