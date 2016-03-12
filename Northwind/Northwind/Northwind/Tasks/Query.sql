@@ -36,3 +36,5 @@ SELECT Northwind.IsBoss(7) AS Boss
 SELECT Northwind.IsBoss(8) AS Boss
 SELECT Northwind.IsBoss(9) AS Boss
 
+--13.3
+
