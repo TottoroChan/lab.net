@@ -11,3 +11,4 @@ WHERE EXISTS
 (SELECT City 
 FROM Northwind.Customers
 WHERE Employees.City = City)
+ORDER BY City, Person;
