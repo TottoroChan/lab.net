@@ -25,5 +25,14 @@ EXEC Northwind.ShippedOrdersDiff 35
 
 EXEC Northwind.ShippedOrdersDiff 4
 
-
+--13.4
+SELECT Northwind.IsBoss(1) AS Boss
+SELECT Northwind.IsBoss(2) AS Boss
+SELECT Northwind.IsBoss(3) AS Boss
+SELECT Northwind.IsBoss(4) AS Boss
+SELECT Northwind.IsBoss(5) AS Boss
+SELECT Northwind.IsBoss(6) AS Boss
+SELECT Northwind.IsBoss(7) AS Boss
+SELECT Northwind.IsBoss(8) AS Boss
+SELECT Northwind.IsBoss(9) AS Boss
 

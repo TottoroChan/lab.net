@@ -34,3 +34,19 @@ WHERE DAY(ShippedDate - OrderDate) > @shippedDelay OR DAY(ShippedDate - OrderDat
 ORDER BY DAY(ShippedDate - OrderDate)
 END
 GO
+
+--13.4
+CREATE FUNCTION Northwind.IsBoss (@id int)
+RETURNS BIT
+AS 
+BEGIN
+DECLARE @flag bit
+SELECT @flag = CASE WHEN 
+(SELECT COUNT(EmployeeID) FROM Northwind.Employees 
+WHERE @id = ReportsTo) = 0 THEN 0 ELSE 1 
+END
+RETURN(@flag)
+END
+GO
+
+
