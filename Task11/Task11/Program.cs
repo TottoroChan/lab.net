@@ -11,15 +11,7 @@ namespace Task11
 	{
 		static void Main(string[] args)
 		{
-			DALDB db = new DALDB();
-			//string s = "RATTC";
-			//int n = 10248;
-			//	db.OrderDetails(n);
-			int k = -10;
-			db.OrderDetails(k);
-			//db.ShowOrders();
 
-			Console.ReadKey();
 		}
 	}
 }
