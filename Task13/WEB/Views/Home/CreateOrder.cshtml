@@ -1,0 +1,24 @@
+﻿@model WEB.Models.OrdersViewModel
+
+@{
+    ViewBag.Title = "Create Order";
+}
+
+<h2>Create Order</h2>
+
+<form action="/Home/CreateOrder" method="post">
+    <label>Customer ID<br /><input type="text" name="CustomerID"  /></label>
+    @Html.ValidationMessageFor(Model => Model.CustomerID)<br /><br />
+    <label>Order Date<br /><input type="date" name="OrderDate"  /></label>
+    @Html.ValidationMessageFor(Model => Model.OrderDate)<br /><br />
+    <input type="submit" value="Send" />
+</form>
+<br /><br />
+
+<h2>Update Order by ID</h2>
+
+<form action="/Home/CreateOrder" method="post">
+    <label>Order ID<br /><input type="number" name="OrderID" /></label>
+    @Html.ValidationMessageFor(Model => Model.OrderID)<br /><br />
+    <input type="submit" value="Update" />
+</form>

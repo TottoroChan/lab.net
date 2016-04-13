@@ -1,0 +1,98 @@
+﻿@using WEB.Models
+@model List<OrderDetailsViewModel>
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+<h2>Order Details</h2>
+
+<table border="1">
+    <tr>
+        <td>Order ID</td>
+        <td>Customer ID</td>
+        <td>Employee ID</td>
+        <td>Order Date</td>
+        <td>Requared Date</td>
+        <td>Shipped Date</td>
+        <td>Order Status</td>
+        <td>Ship Via</td>
+        <td>Freight</td>
+    </tr>
+    @if (Model.Count > 0)
+    {
+        <tr>
+            <td>@Model[0].OrderID</td>
+            <td>@Model[0].CustomerID</td>
+            <td>@Model[0].EmployeeID</td>
+            <td>@Model[0].OrderDate.ToString("d")</td>
+            <td>@Model[0].RequiredDate.ToString("d")</td>
+            <td>@Model[0].ShippedDate.ToString("d")</td>
+            <td>@Model[0].OrderStatus</td>
+            <td>@Model[0].ShipVia</td>
+            <td>@Model[0].Freight</td>
+        </tr>
+    }
+    else
+    {
+        <tr>В заказе не хватает полей</tr>
+    }
+</table>
+<br><br>
+<table border="1">
+    <tr>
+        <td>Ship Name</td>
+        <td>Ship Address</td>
+        <td>Ship City</td>
+        <td>Ship Region</td>
+        <td>Ship Postal Code</td>
+        <td>Ship Country</td>
+    </tr>
+
+    @if (Model.Count > 0)
+    {
+        <tr>
+            <td>@Model[0].ShipName</td>
+            <td>@Model[0].ShipAddress</td>
+            <td>@Model[0].ShipCity</td>
+            <td>@Model[0].ShipRegion</td>
+            <td>@Model[0].ShipPostalCode</td>
+            <td>@Model[0].ShipCountry</td>
+        </tr>
+    }
+    else
+    {
+        <tr>В заказе не хватает полей</tr>
+    }
+</table>
+<br><br>
+<table border="1">
+    <tr>
+        <td>Product ID</td>
+        <td>Product Name</td>
+        <td>Quantity</td>
+        <td>Unit Price</td>
+        <td>Discount</td>
+    </tr>
+
+
+    @if (Model.Count > 0)
+    {
+        foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.ProductID</td>
+                <td>@order.ProductName</td>
+                <td>@order.Quantity</td>
+                <td>@order.UnitPrice</td>
+                <td>@order.Discount</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>В заказе не хватает полей</tr>
+    }
+
+</table>
+

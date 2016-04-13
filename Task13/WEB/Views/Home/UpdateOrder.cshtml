@@ -1,0 +1,50 @@
+﻿@model WEB.Models.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Create Order";
+}
+
+
+<h2>Update Order</h2>
+
+<form action="/Home/UpdateOrder" method="post">
+    <label>Order ID<br /><input type="number" name="OrderID" value="@Model.OrderID" /></label>
+    @Html.ValidationMessageFor(Model => Model.OrderID)<br /><br />
+    <label>Customer ID<br /><input style="text-transform: uppercase" type="text" name="CustomerID" value="@Model.CustomerID" /></label>
+    @Html.ValidationMessageFor(Model => Model.CustomerID)<br /><br />
+    <label>Employee ID<br /><input type="number" name="EmployeeID" value="@Model.EmployeeID" /></label>
+    @Html.ValidationMessageFor(Model => Model.EmployeeID)<br /><br />
+    <label>Order Date<br /><input type="date" name="OrderDate" value="@Model.OrderDate" /></label>
+    @Html.ValidationMessageFor(Model => Model.OrderDate)<br /><br />
+    <label>Required Date<br /><input type="date" name="RequiredDate" value="@Model.RequiredDate" /></label>
+    @Html.ValidationMessageFor(Model => Model.RequiredDate)<br /><br />
+    <label>Shipped Date<br /><input type="date" name="ShippedDate" value="@Model.ShippedDate" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShippedDate)<br /><br />
+    <label>Ship Via<br /><input type="number" name="ShipVia" value="@Model.ShipVia" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipVia)<br /><br />
+    <label>Freight<br /><input type="text" name="Freight" value="@Model.Freight" /></label>
+    @Html.ValidationMessageFor(Model => Model.Freight)<br /><br />
+    <label>Ship Name<br /><input type="text" name="ShipName" value="@Model.ShipName" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipName)<br /><br />
+    <label>Ship Addres<br /><input type="text" name="ShipAddress" value="@Model.ShipAddress" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipAddress)<br /><br />
+    <label>Ship City<br /><input type="text" name="ShipCity" value="@Model.ShipCity" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipCity)<br /><br />
+    <label>Ship Region<br /><input type="text" name="ShipRegion" value="@Model.ShipRegion" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipRegion)<br /><br />
+    <label>Ship Postal Code<br /><input type="text" name="ShipPostalCode" value="@Model.ShipPostalCode" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipPostalCode)<br /><br />
+    <label>Ship Country<br /><input type="text" name="ShipCountry" value="@Model.ShipCountry" /></label>
+    @Html.ValidationMessageFor(Model => Model.ShipCountry)<br /><br />
+
+    <label>Product ID<br /><input type="number" name="ProductID" /></label>
+    @Html.ValidationMessageFor(Model => Model.ProductID)<br /><br />
+    <label>Quantity<br /><input type="number" name="Quantity" /></label>
+    @Html.ValidationMessageFor(Model => Model.Quantity)<br /><br />
+    <label>Unit Price<br /><input type="text" name="UnitPrice" placeholder="0.00" /></label>
+    @Html.ValidationMessageFor(Model => Model.UnitPrice)<br /><br />
+    <label>Discount<br /><input type="text" name="Discount" placeholder="0.00" /></label>
+    @Html.ValidationMessageFor(Model => Model.Discount)<br /><br />
+
+    <input type="submit" value="Send" />
+</form>

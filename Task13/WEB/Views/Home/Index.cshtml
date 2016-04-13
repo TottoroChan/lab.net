@@ -1,0 +1,32 @@
+﻿@model  List<OrdersViewModel>
+@using WEB.Models
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+
+<table border="1">
+    <tr>
+        <td>Order ID</td>
+        <td>Customer ID</td>
+        <td>Customer Name</td>
+        <td>Order Date</td>
+        <td>Order Status</td>
+        <td>Order Price</td>
+    </tr>
+
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td><a href="/Home/OrderDetails?id=@order.OrderID">@order.OrderID</a></td>
+            <td>@order.CustomerID</td>
+            <td>@order.ContactName</td>
+            <td>@order.OrderDate.ToString("d")</td>
+            <td>@order.OrderStatus</td>
+            <td>@order.Total.ToString("#.###")</td>
+        </tr>
+    }
+
+</table>
