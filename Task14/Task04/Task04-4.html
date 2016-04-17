@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Task4</title>  
+		<script type="text/javascript">
+			var t = 10;
+			var doit = true;
+			function timer()
+			{
+				 if(!doit) return false;
+				if(t<=9){t="0" + t;}
+				time.innerHTML=t;
+				//if(document.getElementById){}
+				if(t==00){return location.replace("task04-5.html");}
+				t--;
+				setTimeout("timer()", 1000);
+			}
+			function stop_time()
+			{
+				if (doit == true)
+					doit = false;
+				else 
+				{
+					doit = true;
+					timer();
+				}
+			}
+		</script>
+	</head>   
+	<body onLoad="timer();">
+	<h1 id = "time" style="text-align: center;"></h1>
+	<p style="text-align: center;"><img src="4.jpg"></p><br/>
+	<div style="display: block; margin: 0 auto; width: 186px;">	
+	<input type="button" id="back" value="back" onclick="location.replace('task04-3.html')">
+	<input type="button" id="stop" value="stop/start" onclick="stop_time()">
+	<input type="button" id="restart" value="restart" href="#">
+	</div>
+	</body>
+</html>

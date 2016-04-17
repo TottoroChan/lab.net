@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Task3</title>  
+		<script type="text/javascript">
+		function move_one(fromList, toList)
+		{
+			var one = document.getElementById(fromList);
+			var two = document.getElementById(toList);
+			
+			for(var i = 0; i < one.options.length; i++)
+			{
+				if (one.options[i].selected == true)
+				{
+					var data = one.options[i];
+					var newData = document.createElement("option");
+					newData.value = data.value;
+					newData.text = data.text;
+					newData.selected = true;
+					two.add(newData, null);
+                    one.remove(i, null);
+					i--;
+				}
+			}
+		}
+		function move_all(fromList, toList)
+		{
+			var one = document.getElementById(fromList);
+			var two = document.getElementById(toList);
+			
+			for(var i = 0; i < one.options.length; i++)
+			{
+				var data = one.options[i];
+				var newData = document.createElement("option");
+				newData.value = data.value;
+				newData.text = data.text;
+				newData.selected = true;
+				two.add(newData, null);
+                one.remove(i, null);
+				i--;
+			}
+		}
+		</script>
+	</head>   
+	<body>
+		<table>
+			<tr >
+				<td>
+					<label>Available<br>
+					<select id="first" size="10" multiple="" style="width: 102px;">
+						<option value="1">item 1</option>
+						<option value="2">item 2</option>
+						<option value="3">item 3</option>
+						<option value="4">item 4</option>
+						<option value="5">item 5</option>
+						<option value="6">item 6</option>
+						<option value="7">item 7</option>
+						<option value="8">item 8</option>
+						<option value="9">item 9</option>
+						<option value="10">item 10</option>
+					</select></label>
+				</td>
+				<td valign = "center">
+					<input type="button" value=">" style="width: 32px;" onclick="move_one('first', 'second')"><br>
+					<input type="button" value="<" style="width: 32px;" onclick="move_one('second', 'first')"><br>
+					<input type="button" value=">>" onclick="move_all('first', 'second')"><br>
+					<input type="button" value="<<" onclick="move_all('second', 'first')">
+				</td>
+				<td>
+					<label>Selected<br>
+					<select id="second" size="10" multiple="" style="width: 102px;">
+					</select></label>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

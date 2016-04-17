@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Task1</title>  
+		<script type="text/javascript">
+			function worddell()
+			{
+				var str = document.forms["t"].elements["s"].value;
+				var str2 = '';
+				for (var i = 0; i<str.length; i++)
+				{
+					var twin=0;
+					for (var j=0; j<str.length; j++)
+					{
+						if(str[i]==str[j])
+							twin++;
+						if ((twin==1)&&((str[j]==' ')||(str[j]==',')||(str[j]=='.')||(str[j]=='\t')||
+						(str[j]=='?')||(str[j]=='!')||(str[j]==':')||(str[j]==';')))
+							twin=0;
+					}
+					if(twin<2)
+						str2 += str[i];					
+				}
+				alert(str2);
+			}
+		</script>
+	</head>   
+	 <body>
+		<form id="t" name="t">
+			<input type="text" id="s" name="s" />
+			<input type="button" value="Send" onClick="worddell()" />
+		</form>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Task2</title>  
+	<script type="text/javascript">
+		function arifmetic()
+		{
+			var exp = document.forms["t"].elements["s"].value;	
+			var num = [], sign="", i=0, temp="";
+			while (i<exp.length)
+			{
+				if((exp[i] == '+')||(exp[i]=='-')||
+				(exp[i] == '*')||(exp[i]=='/')||(exp[i]=='='))
+				{
+					sign += exp[i];
+					temp += ' ';
+				}
+				else 
+				{
+					temp += exp[i];
+				}
+				i++;
+			}
+			var j=temp.length;
+			temp = temp.split(' ');
+			while (j>0)
+			{
+				if (sign[j-1] == '+')
+					temp[j-1] = temp[j-1]*1 + temp[j]*1;
+				if (sign[j-1] == '-')
+					temp[j-1]-=temp[j];
+				if (sign[j-1] == '*')
+					temp[j-1]*=temp[j];
+				if (sign[j-1] == '/')
+					temp[j-1]/=temp[j];
+				j--;
+			}
+			result.innerHTML= temp[0].toFixed(2);
+		}
+	</script>
+</head>   
+ <body>
+	<form id="t" name="t">
+		<input type="text" id="s" name="s" />=<b id="result"></b><br>
+		<input type="button" value="Send" onClick="arifmetic()" />
+	</form>
+</body>
+</html>
