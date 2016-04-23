@@ -12,8 +12,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>ForumBD</RootNamespace>
-    <AssemblyName>ForumBD</AssemblyName>
+    <RootNamespace>ForumDB</RootNamespace>
+    <AssemblyName>ForumDB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
