@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace BLL.DTO
 {
-	public class Users
+	public class UsersDTO
 	{
 		public int UserID { get; set; }
 		public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace DAL.Entities
 		public string Password { get; set; }
 		public int TypeID { get; set; }
 
-		public Users()
+		public UsersDTO()
 		{
 			UserID = 0;
 			Name = null;

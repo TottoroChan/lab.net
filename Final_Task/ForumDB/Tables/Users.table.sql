@@ -5,6 +5,6 @@
     [RegistrationDate] DATE NOT NULL , 
     [Login] NVARCHAR(20) NOT NULL, 
     [Password] NVARCHAR(20) NOT NULL, 
-    [TypeID] INT NOT NULL DEFAULT 3, 
+    [TypeID] INT NOT NULL DEFAULT 2, 
     CONSTRAINT [FK_Users_UserTypes] FOREIGN KEY (TypeID) REFERENCES UserTypes(TypeID) 
 )

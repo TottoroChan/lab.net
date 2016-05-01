@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace BLL.DTO
 {
-	public class Messages
+	public class MessagesDTO
 	{
 		public int MessageID { get; set; }
 		public int TopicID { get; set; }
@@ -17,7 +17,7 @@ namespace DAL.Entities
 		public DateTime RegistrationDate { get; set; }
 		public int UserID { get; set; }
 
-		public Messages()
+		public MessagesDTO()
 		{
 			MessageID = 0;
 			TopicID = 0;

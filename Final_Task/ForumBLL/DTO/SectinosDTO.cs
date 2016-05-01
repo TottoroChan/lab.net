@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace BLL.DTO
 {
-	public class Sections
+	public class SectionsDTO
 	{
 		public int SectionID { get; set; }
 		public string SectionName { get; set; }
 
-		public Sections()
+		public SectionsDTO()
 		{
 			SectionID = 0;
 			SectionName = null;

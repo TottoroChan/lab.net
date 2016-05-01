@@ -4,26 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace ForumWEB.Models
 {
-	public class Users
+	public class UsersViewModel
 	{
-		public int UserID { get; set; }
 		public string Name { get; set; }
 		public DateTime RegistrationDate { get; set; }
 		public string Login { get; set; }
-		public string Password { get; set; }
 		public int TypeID { get; set; }
-
-		public Users()
-		{
-			UserID = 0;
-			Name = null;
-			RegistrationDate = DateTime.MinValue;
-			Login = null;
-			Password = null;
-			TypeID = 0;
-		}
 
 	}
 }

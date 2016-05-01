@@ -1,0 +1,41 @@
+﻿@model  List<TopicsViewModel>
+@using ForumWEB.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (i == 0)
+            {
+                <tr bgcolor="#409D3E" class="font5">
+                    <td width="1%"></td>
+                    <td width="60%">@Model[i].SectionName;</td>
+                    <td width="5%">Ответов</td>
+                    <td width="10%" valign="middle" nowrap="">Тема открыта</td>
+                    <td width="14%" valign="middle" nowrap="">Последний ответ</td>
+                </tr>
+            }
+            else if (@Model[i].SectionName != Model[i - 1].SectionName)
+            {
+                <tr bgcolor="#409D3E" class="font5">
+                    <td width="1%"></td>
+                    <td width="60%">@Model[i].SectionName;</td>
+                    <td width="5%">Ответов</td>
+                    <td width="10%" valign="middle" nowrap="">Тема открыта</td>
+                    <td width="14%" valign="middle" nowrap="">Последний ответ</td>
+                </tr>
+            }
+            <tr valign="top">
+                <td bgcolor="#FFFFFF"><img border="0" src="http://www7.jpe.ru/gif/1//l.gif" alt=""></td>
+                <td bgcolor="#FFFFFF"><font class="font3"><a href="#">@Model[i].TopicName</a></font> </td>
+                <td class="font2" align="center" bgcolor="#E0EFE0">@Model[i].MessageCount</td>
+                <td nowrap="" class="font2" align="center" bgcolor="#E8E8E8">@Model[i].CreateDate<br>@Model[i].AuthorName</td>
+                <td nowrap="" class="font2" align="center" bgcolor="#E0EFE0">@Model[i].SendDate<br>@Model[i].Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
