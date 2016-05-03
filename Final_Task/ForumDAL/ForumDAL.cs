@@ -104,7 +104,9 @@ namespace DAL
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var command = new SqlCommand(
-					"SELECT Login, Name, RegistrationDate, TypeID FROM dbo.Users", connection);
+					"SELECT u.Login, u.Name, u.RegistrationDate, u.TypeID, " +
+					"ut.UserType FROM dbo.Users as u INNER JOIN " +
+					"dbo.UserTypes as ut ON u.TypeID = ut.TypeID", connection);
 
 				connection.Open();
 				SqlDataReader reader = command.ExecuteReader();
@@ -117,6 +119,7 @@ namespace DAL
 					user.Name = Convert.ToString(reader.GetValue(1));
 					user.RegistrationDate = Convert.ToDateTime(reader.GetValue(2));
 					user.TypeID = Convert.ToInt32(reader.GetValue(3));
+					user.UserType = Convert.ToString(reader.GetValue(4));
 					users.Add(user);
 				}
 				return users;
@@ -208,6 +211,40 @@ namespace DAL
 			}
 		}
 
+		public Topics GetTopicByID(int TopicID)
+		{
+			if (CheckTopicID(TopicID) == false)
+				throw new ArgumentException("Incorrect value", "TopicID");
+			
+			using (var connection = new SqlConnection(connectionString))
+			{
+				var command = new SqlCommand(
+					"SELECT t.SectionID, t.TopicID, t.TopicName, t.TopicText, " +
+					"t.CreateDate, u.Name, (SELECT COUNT(MessageID)" +
+					" FROM dbo.Messages WHERE TopicID = t.TopicID)" +
+					" as MessageCount FROM dbo.Topics as t " +
+					"INNER JOIN dbo.Users as u ON u.UserID = t.UserID" +
+					" WHERE t.TopicID = @TopicID", connection);
+
+				command.Parameters.AddWithValue("@TopicID", TopicID);
+
+				connection.Open();
+				SqlDataReader reader = command.ExecuteReader();
+
+				var topic = new Topics();
+				while (reader.Read())
+				{	
+					topic.SectionID = Convert.ToInt32(reader.GetValue(0));
+					topic.TopicID = Convert.ToInt32(reader.GetValue(1));
+					topic.TopicName = Convert.ToString(reader.GetValue(2));
+					topic.TopicText = Convert.ToString(reader.GetValue(3));
+					topic.CreateDate = Convert.ToDateTime(reader.GetValue(4));
+					topic.Name = Convert.ToString(reader.GetValue(5));
+				}
+				return topic;
+			}
+		}
+
 		public IEnumerable<Messages> GetMessages(int TopicID)
 		{
 			if (CheckTopicID(TopicID) == false)
@@ -218,9 +255,9 @@ namespace DAL
 			{
 				var command = new SqlCommand(
 					"SELECT m.MessageID, m.TopicID, m.SendDate, m.Text, " +
-					"m.StatusID, u.Name, u.RegistrationDate FROM dbo.Messages"+
-					" as m INNER JOIN dbo.Users as u ON m.UserID = u.UserID" +
-					"WHERE m.TopicID = @TopicID", connection);
+					"m.StatusID, u.Name FROM dbo.Messages as m "+
+					" INNER JOIN dbo.Users as u ON m.UserID = u.UserID " +
+					"WHERE m.TopicID = @TopicID ORDER BY m.SendDate", connection);
 				command.Parameters.AddWithValue("@TopicID", TopicID);
 
 				connection.Open();
@@ -236,8 +273,6 @@ namespace DAL
 					message.Text = Convert.ToString(reader.GetValue(3));
 					message.StatusID = Convert.ToInt32(reader.GetValue(4));
 					message.Name = Convert.ToString(reader.GetValue(5));
-					message.RegistrationDate = 
-										Convert.ToDateTime(reader.GetValue(6));
 					messages.Add(message);
 				}
 				return messages;

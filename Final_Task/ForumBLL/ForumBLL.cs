@@ -82,6 +82,7 @@ namespace BLL
 					user.Name = u.Name;
 					user.RegistrationDate = u.RegistrationDate;
 					user.TypeID = u.TypeID;
+					user.UserType = u.UserType;
 					Users.Add(user);
 				}
 				return Users;
@@ -144,13 +145,34 @@ namespace BLL
 					topic.TopicID = t.TopicID;
 					topic.SectionID = t.SectionID;
 					topic.TopicName = t.TopicName;
-					topic.TopicText = t.TopicText;
 					topic.Name = t.Name;
 					topic.CreateDate = t.CreateDate;
 					topic.MessageCount = t.MessageCount;
 					Topics.Add(topic);
 				}
 				return Topics;
+			}
+			catch (ArgumentException ex)
+			{
+				throw new ValidationException(ex.Message, ex.ParamName);
+			}
+		}
+
+		public TopicsDTO GetTopicByID(int TopicID)
+		{
+			try
+			{
+				TopicsDTO topic = new TopicsDTO();
+				var TopicDAL = Data.GetTopicByID(TopicID);
+
+				topic.SectionID = TopicDAL.SectionID;
+				topic.TopicID = TopicDAL.TopicID;
+				topic.TopicName = TopicDAL.TopicName;
+				topic.TopicText = TopicDAL.TopicText;
+				topic.Name = TopicDAL.Name;
+				topic.CreateDate = TopicDAL.CreateDate;
+
+				return topic;
 			}
 			catch (ArgumentException ex)
 			{
@@ -174,7 +196,6 @@ namespace BLL
 					message.Text = m.Text;
 					message.StatusID = m.StatusID;
 					message.Name = m.Name;
-                    message.RegistrationDate = m.RegistrationDate;
 
 					Messages.Add(message);
 				}

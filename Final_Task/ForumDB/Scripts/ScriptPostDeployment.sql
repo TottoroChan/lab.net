@@ -43,7 +43,5 @@ SELECT t.SectionID, t.TopicName, t.CreateDate, u.Name, (SELECT COUNT(MessageID)
  FROM dbo.Messages WHERE TopicID = t.TopicID) as MessageCount FROM dbo.Topics as t
   INNER JOIN dbo.Users as u ON u.UserID = t.UserID WHERE t.SectionID = @SectionID
 
-
-
 */
 

@@ -1,0 +1,36 @@
+﻿@model  List<UsersViewModel>
+@using ForumWEB.Models
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+<table bgcolor="#409D3E" border="0" cellpadding="6" cellspacing="1" width="100%">
+  <tbody>
+    <tr bgcolor="#409D3E" class="font5" align="center">
+        <td width="25%">Ник</td>
+        <td width="25%">Имя</td>
+        <td width="25%">Дата регистрации</td>
+        <td width="25%">Статус</td>
+    </tr>
+
+    @foreach (var user in Model)
+    { 
+        <tr align="center" bgcolor="#E0EFE0" class="font2">
+            <td><font class="font3">@user.Login</font> </td>
+            <td>@user.Name</td>
+            <td>@user.RegistrationDate</td>
+            <td>
+                @user.UserType
+                <br/>
+                <select name="TypeID">
+                    <option selected="selected">Изменить права</option>
+                    <option value="1">Администратор</option>
+                    <option value="2">Пользователь</option>
+                    <option value="0">Бан</option>
+                </select>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

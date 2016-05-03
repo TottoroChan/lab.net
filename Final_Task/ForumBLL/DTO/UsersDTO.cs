@@ -14,6 +14,7 @@ namespace BLL.DTO
 		public string Login { get; set; }
 		public string Password { get; set; }
 		public int TypeID { get; set; }
+		public string UserType { get; set; }
 
 		public UsersDTO()
 		{
@@ -23,6 +24,7 @@ namespace BLL.DTO
 			Login = null;
 			Password = null;
 			TypeID = 0;
+			UserType = null;
 		}
 
 	}

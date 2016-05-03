@@ -12,6 +12,7 @@ namespace ForumWEB.Models
 		public DateTime RegistrationDate { get; set; }
 		public string Login { get; set; }
 		public int TypeID { get; set; }
+		public string UserType { get; set; }
 
 	}
 }

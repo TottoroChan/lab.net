@@ -1,0 +1,53 @@
+﻿@model  List<MessagesViewModel>
+@using ForumWEB.Models
+
+@{
+    ViewBag.Title = ViewBag.TopicName;
+}
+
+<table>
+    <tbody>
+        <tr align="center" class="font5" bgcolor="#409D3E">
+            <td width="25%">Автор</td>
+            <td width="75%">Сообщение</td>
+        </tr>
+        <tr bgcolor="#E0EFE0">
+            <td align="center">
+                <div class="font3">
+                    <a href="#"><b>@ViewBag.AuthorName</b></a><br />
+                    <div class="font1">@ViewBag.CreateDate</div>
+                </div>
+            </td>
+            <td valign="top">
+                <div class="font1">@ViewBag.TopicName</div><br/><br/>
+                <div class="font1">@ViewBag.TopicText</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" bgcolor="#E8E8E8" align="center"></td>
+        </tr>
+        @if (Model.Count != 0)
+        {
+            foreach (var message in Model)
+            {
+                <tr bgcolor="#E0EFE0">
+                    <td align="center">
+                        <div class="font3">
+                            <a href="#"><b>@message.Name</b></a><br />
+                            <div class="font1">@message.SendDate</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="font1">@message.Text</div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" bgcolor="#E0EFE0" align="center">В теме ещё нет сообщений.</td>
+            </tr>
+        }
+    </tbody>
+</table>
