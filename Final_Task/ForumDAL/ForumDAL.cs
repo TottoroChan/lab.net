@@ -12,14 +12,15 @@ namespace DAL
 {
 	public class ForumDAL
     {
-		/*static string ConnectionString()
+		//Ошибка здесь появлется
+		static string ConnectionString()
 		{
 			var connectionStringItem = ConfigurationManager.ConnectionStrings["ForumConnection"];
 			var connectionString = connectionStringItem.ConnectionString;
 			return connectionString;
-		}*/
+		}
 
-		string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=ForumDB;Integrated Security=True;";
+		//string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=ForumDB;Integrated Security=True;";
 
 		/// <summary>
 		///
@@ -30,7 +31,7 @@ namespace DAL
 			if (CheckLogin(user.Login) == false)
 				throw new ArgumentException("Incorrect value", "Login");
 
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 				"INSERT INTO dbo.Users (Name, Login, Password," +
@@ -52,7 +53,7 @@ namespace DAL
 			if (CheckLogin(user.Login) == false)
 				throw new ArgumentException("Incorrect value", "Login");
 
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT Login, Password FROM dbo.Users" +
@@ -79,7 +80,7 @@ namespace DAL
 			if (CheckLogin(Login) == false)
 				throw new ArgumentException("Incorrect value", "Login");
 
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT Login, TypeID FROM dbo.Users" +
@@ -101,7 +102,7 @@ namespace DAL
 		public IEnumerable<Users> GetUsers()
 		{
 			var users = new List<Users>();
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT u.Login, u.Name, u.RegistrationDate, u.TypeID, " +
@@ -131,7 +132,7 @@ namespace DAL
 			if (CheckTopicID(TopicID) == false)
 				throw new ArgumentException("Incorrect value", "TopicID");
 			
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT TOP(1) u.Name, m.SendDate FROM dbo.Messages as m" +
@@ -155,7 +156,7 @@ namespace DAL
 		public IEnumerable<Sections> GetSections()
 		{
 			var sections = new List<Sections>();
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT SectionID, SectionName FROM dbo.Sections", connection);
@@ -181,7 +182,7 @@ namespace DAL
 				throw new ArgumentException("Incorrect value", "SectionID");
 
 			var topics = new List<Topics>();
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT t.SectionID, t.TopicID, t.TopicName, "+
@@ -216,7 +217,7 @@ namespace DAL
 			if (CheckTopicID(TopicID) == false)
 				throw new ArgumentException("Incorrect value", "TopicID");
 			
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT t.SectionID, t.TopicID, t.TopicName, t.TopicText, " +
@@ -251,7 +252,7 @@ namespace DAL
 				throw new ArgumentException("Incorrect value", "TopicID");
 
 			var messages = new List<Messages>();
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"SELECT m.MessageID, m.TopicID, m.SendDate, m.Text, " +
@@ -281,7 +282,7 @@ namespace DAL
 
 		public bool CreateTopic(Topics topic)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 				"INSERT INTO dbo.Topics (SectionID, TopicName, TopicText," +
@@ -300,7 +301,7 @@ namespace DAL
 
 		public bool CreateMessage(Messages message)
 		{
-			using(var connection = new SqlConnection(connectionString))
+			using(var connection = new SqlConnection(ConnectionString()))
             {
 				var command = new SqlCommand(
 				"INSERT INTO dbo.Messages (TopicID, Text, SendDate,UserID) " +
@@ -318,7 +319,7 @@ namespace DAL
 
 		public bool ChangeUserType(Users user)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"UPDATE dbo.Users SET TypeID = @TypeID WHERE" +
@@ -336,7 +337,7 @@ namespace DAL
 
 		public bool ChangeMessageType(Messages message)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				var command = new SqlCommand(
 					"UPDATE dbo.Messages SET StatusID = @StatusID WHERE " +
@@ -351,7 +352,7 @@ namespace DAL
 
 		public bool CheckSectionID(int SectionID)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				SqlCommand command = new SqlCommand("select SectionID from dbo.Sections where SectionID = @id");
 				command.Connection = connection;
@@ -368,7 +369,7 @@ namespace DAL
 		/// <param name="id"></param>
 		public bool CheckTopicID(int TopicID)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				SqlCommand command = new SqlCommand("select TopicID from dbo.Topics where TopicID = @id");
 				command.Connection = connection;
@@ -381,7 +382,7 @@ namespace DAL
 
 		public bool CheckLogin(string login)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			using (var connection = new SqlConnection(ConnectionString()))
 			{
 				SqlCommand command = new SqlCommand("select Login from dbo.Users where Login like @Login");
 				command.Connection = connection;
