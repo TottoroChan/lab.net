@@ -1,0 +1,74 @@
+﻿@model ForumWEB.Models.UsersViewModel
+
+@{
+    ViewBag.Title = "ChangeUserType";
+}
+
+<table >
+    <tbody>
+        <tr>
+            <td width=25%>
+            </td>
+            <td>
+                <div class="textbox">
+                    @using (Html.BeginForm())
+                    {
+                       <font class="text">Данные пользавателя @Model.Name</font>
+                            <div>
+                                <font class="text">Логин</font>
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.Login)
+                            </div>
+                            <div>
+                                <font class="text">Пароль</font> 
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.Password)
+                            </div>
+                            <div>
+                                <font class="text">Имя</font>
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.Name)
+                            </div>
+                            <div>
+                                <font class="text">Ссылка на аватар</font>
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.Avatar)
+                            </div>
+                            <div>
+                                <font class="text">Дата регистрации</font>
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.RegistrationDate)
+                            </div>
+                            <div>
+                                <font class="text">Права</font>
+                            </div>
+                            <div>
+                                <select name="TypeID">
+                                    <option value="1">Администратор</option>
+                                    <option value="2">Пользователь</option>
+                                    <option value="0">Забанить</option>
+                                </select>
+                            </div>
+                            <p>
+                                <input type="submit" value="Сохранить" />
+                            </p>}
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                         @Html.ValidationSummary()
+                        </font>
+                    }
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

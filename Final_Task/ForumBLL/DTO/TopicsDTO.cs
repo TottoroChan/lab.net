@@ -16,6 +16,8 @@ namespace BLL.DTO
 		public DateTime CreateDate { get; set; }
 		public int MessageCount { get; set; }
 		public int UserID { get; set; }
+		public string Avatar { get; set; }
+
 
 		public TopicsDTO()
 		{
@@ -27,6 +29,7 @@ namespace BLL.DTO
 			CreateDate = DateTime.MinValue;
 			MessageCount = 0;
 			UserID = 0;
+			Avatar = null;
 		}
 	}
 }

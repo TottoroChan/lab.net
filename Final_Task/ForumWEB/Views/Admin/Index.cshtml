@@ -1,17 +1,18 @@
 ﻿@model  List<TopicsViewModel>
 @using ForumWEB.Models
+
 @{
     ViewBag.Title = "Index";
 }
 
-
+@Html.Action("NewSection", "Admin")
 <table>
     <tbody>
         @for (int i = 0; i < Model.Count; i++)
         {
             if (i == 0)
             {
-                <tr >
+                <tr>
                     <td width="55%"><font class="text">@Model[i].SectionName</font></td>
                     <td width="5%"><font class="text">Ответов</font></td>
                     <td width="20%"><font class="text">Тема открыта</font></td>
@@ -28,12 +29,12 @@
                 </tr>
 }
             <tr>
-                <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID}, null)</td>
+                <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID }, null)</td>
                 <td class="user"><font class="text">@Model[i].MessageCount</font></td>
                 <td class="user"><font class="text">@Model[i].CreateDate.Day<br>@Model[i].AuthorName</font></td>
                 @if (Model[i].SendDate != DateTime.MinValue)
                 {
-                <td class="user"><font class="text">@Model[i].SendDate.ToShortDateString()<br>@Model[i].Name</font></td>}
+                    <td class="user"><font class="text">@Model[i].SendDate.ToShortDateString()<br>@Model[i].Name</font></td>}
                 else
                 {
                     <td class="user"><font class="text">В теме ещё нет сообщений.</font></td>}
@@ -42,4 +43,4 @@
     </tbody>
 </table>
 
-@Html.Partial("NewTopic", new { SectionID = ViewBag.SectionID, SectionName = ViewBag.SectionName })
+@Html.Action("NewTopic", "Home", new { SectionID = ViewBag.SectionID, SectionName = ViewBag.SectionName })

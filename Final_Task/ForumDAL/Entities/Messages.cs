@@ -16,6 +16,7 @@ namespace DAL.Entities
 		public string Name { get; set; }
 		public DateTime RegistrationDate { get; set; }
 		public int UserID { get; set; }
+		public string Avatar { get; set; }
 
 		public Messages()
 		{
@@ -27,6 +28,7 @@ namespace DAL.Entities
 			Name = null;
 			RegistrationDate = DateTime.MinValue;
 			UserID = 0;
+			Avatar = null;
 		}
 	}
 }

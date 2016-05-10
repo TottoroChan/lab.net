@@ -1,0 +1,51 @@
+﻿body 
+{
+    background-color: #73808a;
+}
+a
+{
+    color: white;
+    font-family: Arial;
+
+}
+.text
+{
+   font-family: Times New Roman;
+   color: aliceblue;
+}
+.textbox
+{
+    padding: 10px;
+    text-align: center;
+}
+textarea
+{
+    margin: 0px; 
+    width: 627px; 
+    height: 137px;
+}
+table
+{
+    width: 100%;
+    border: 1px solid #282262;
+}
+
+tr
+{
+    background-color: #526479;
+}
+.user
+{
+    text-align: center;
+    padding: 10px;
+}
+.message
+{
+    text-align: left;
+    padding: 10px;
+}
+td
+{
+    border: 1px solid #284262;
+    padding: 10px;
+}

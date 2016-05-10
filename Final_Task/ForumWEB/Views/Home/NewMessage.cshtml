@@ -1,0 +1,74 @@
+﻿@using ForumWEB.Models
+@{
+    ViewBag.Title = "NewMessage";
+    MessagesViewModel newMessage = new MessagesViewModel();
+}
+
+<table >
+    <tbody>
+        <tr >
+            <td colspan="3"><b><font class="text">Новое сообщение: </font></b></td>
+        </tr>
+        <tr >
+            <td width=25% class="user">
+                @if (User.IsInRole("Administrator") || User.IsInRole("Ban") || User.IsInRole("User"))
+                {
+                    <div>
+                        <b><font class="text">@ViewBag.Name</font></b><br /><br />
+                        <div><img scr="@ViewBag.Avatar" width="120" height="120"/></div>
+                    </div>}
+                else
+                {
+                    <div>
+                        <b><font class="text">Гость</font></b><br /><br />
+                        <div><img scr="http://mydermatolog.ru/sites/default/files/pictures/userdef.jpg" width="120" height="120"/></div>
+                    </div>}
+            </td>
+            <td>
+                <div class="textbox">
+                    <form action="/Home/NewMessage" method="post">
+                            <div>
+                                <font class="text">Сообщение</font>
+                            </div>
+                            @if (User.IsInRole("Administrator") || (User.IsInRole("User")))
+                            {
+                                <input type="hidden" name="TopicID" value="@ViewBag.TopicID">
+                                <input type="hidden" name="TopicID" value="@ViewBag.UserID">
+                                <div>
+                                    <textarea name="Text" cols="56" rows="8" ></textarea>
+                                </div>
+                                <p>
+                                    <input type="submit" value="Отправить" />
+                                </p>}
+                            else
+                            {
+                                <div>
+                                    @if (User.IsInRole("Ban"))
+                                    {
+                                        <textarea name="TopicText" cols="56" rows="8" disabled
+                                                  placeholder="Ваш  аккаунт забанен и вы не можете оставлять сообщеня на форуме."></textarea>}
+                                    else
+                                    {
+                                        <textarea name="Text" cols="56" rows="8" disabled
+                                                  placeholder="Вы не можете оставлять сообщения на форуме. Войдте или зарегистрируйтесь."></textarea>
+                                    }
+                                </div>
+                                <p>
+                                    <input type="submit" value="Отправить" disabled />
+                                </p>}
+                       </form>
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

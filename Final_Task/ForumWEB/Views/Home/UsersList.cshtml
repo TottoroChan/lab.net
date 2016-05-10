@@ -1,0 +1,35 @@
+﻿@model  List<UsersViewModel>
+@using ForumWEB.Models
+
+@{
+    ViewBag.Title = "UsersList";
+}
+
+<table >
+  <tbody>
+    <tr >
+        <td width="25%"><font class="text">Ник</font></td>
+        <td width="25%"><font class="text">Имя</font></td>
+        <td width="25%"><font class="text">Дата регистрации</font></td>
+        <td width="25%"><font class="text">Статус</font></td>
+    </tr>
+
+    @foreach (var user in Model)
+    { 
+        <tr class="user">
+            <td><font class="text">@user.Login</font><br />
+            <img scr="@ViewBag.Avatar" width="120" height="120" /> 
+                <br />
+                @{    if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Изменить данные пользователя", "ChangeUserType", "Admin", new {UserID = @user.UserID}, null)
+                    }
+                }
+            </td>
+            <td><font class="text">@user.Name</font></td>
+            <td><font class="text">@user.RegistrationDate</font></td>
+            <td><font class="text">@user.UserType</font></td>
+        </tr>
+    }
+    </tbody>
+</table>

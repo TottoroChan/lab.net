@@ -1,0 +1,44 @@
+﻿@model ForumWEB.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<table>
+    <tbody>
+        <tr>
+            <td width=25%>
+            </td>
+            <td>
+                <div class="textbox">
+                    @using (Html.BeginForm())
+                    {
+                        <div>
+                            <font class="text">Логин</font>
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.Login)
+                            </div>
+                            <div>
+                                <font class="text">Пароль</font>
+                            </div>
+                            <div>
+                                @Html.PasswordFor(model => model.Password)
+                            </div>
+                            <p>
+                                <input type="submit" value="Вход" />
+                            </p>}
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>	

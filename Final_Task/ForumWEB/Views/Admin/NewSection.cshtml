@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "NewSction";
+}
+
+<table>
+    <tbody>
+        <tr>
+            <td colspan="3"><b><font class="text">Новый раздел: </font></b></td>
+        </tr>
+        <tr>
+            <td width=25%>
+            </td>
+            <td>
+                <div class="textbox">
+                    <form action="/Admin/NewSection" method="post">
+                        <font class="text">Название: </font>
+                            <input type="text" name="sectionName" />
+                            <input type="submit" value="Создать" />
+
+                    </form>
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

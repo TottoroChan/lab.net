@@ -3,15 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Forum</title>
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div>
-        <button style="border-radius: 5px; border: 1px solid #666" type="button"><a class="navbar-brand" href="/">Главная</a></button>
-        <button type="button"><a class="navbar-brand" href="/Home/UserList">Список пользователей</a></button>
-        <button type="button"><a class="navbar-brand" href="/">Регистрация</a></button>
-        <button type="button"><a class="navbar-brand" href="/">Вход</a></button>
+        <div display="block" style="float: left; margin-left: 10%;">
+            @Html.ActionLink("Главная", "Index", "Home")
+            &nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Список пользователей", "UsersList", "Home")
+        </div>
+        <div display="block" style="float: right; margin-right: 10%";>
+            @Html.ActionLink("Регистрация", "Registration", "Home")
+            &nbsp;&nbsp;&nbsp;
+            @{if (!User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Вход", "LogIn", "Account")
+                }
+                else
+                {
+                    @Html.ActionLink("Выход", "LogOut", "Account")
+                }
+             }
+        </div>
     </div>
-
+    <br/><br/>
     <div class="container body-content"> 
         @RenderBody()
         <hr />

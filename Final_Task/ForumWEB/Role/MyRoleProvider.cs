@@ -12,14 +12,12 @@ namespace ForumWEB.Role
 		ForumBLL Data = new ForumBLL();
 		public override string[] GetRolesForUser(string username)
 		{
-			int type = Data.UserInfo(username);
+			int type = Data.UserRole(username);
 			if (type == 0)
 				return new string[] { "Ban" };
 			if (type == 1)
 				return new string[] { "Administrator" };
-			if (type == 2)
-				return new string[] { "User" };
-			else return new string[] { "Guest" };
+			else return new string[] { "User" };
 		}
 
 		public override void AddUsersToRoles(string[] usernames, string[] roleNames)

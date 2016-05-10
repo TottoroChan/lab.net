@@ -1,0 +1,71 @@
+﻿@model ForumWEB.Models.UsersViewModel
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+<table >
+    <tbody>
+        <tr>
+            <td width=25%></td>
+            <td class="user">
+                 <b><font class="text">Регистрация</font></b>
+            </td>
+            <td width=25%>
+            </td>
+        </tr>
+        <tr >
+            <td width=25%>
+            </td>
+            <td >
+                <div class="textbox">
+                   @using (Html.BeginForm())
+                   {
+                    <div>
+                        <font class="text">Логин</font>
+                        </div>
+                        <div>
+                            
+                            @Html.EditorFor(model => model.Login)
+                        </div>
+                        <div>
+                            <font class="text">Пароль</font>
+                        </div>
+                        <div>
+                            @Html.PasswordFor(model => model.Password)
+                        </div>
+                        <div>
+                            <font class="text">Повторите пароль</font>
+                        </div>
+                        <div>
+                            @Html.PasswordFor(model => model.ConfirmPassword)
+                        </div>
+                        <div>
+                            <font class="text">Ваше имя</font>
+                        </div>
+                        <div>
+                            @Html.EditorFor(model => model.Name)
+                        </div>
+                        <div>
+                            <font class="text">Ссылка на аватар</font>
+                        </div>
+                        <div>
+                            @Html.EditorFor(model => model.Avatar)
+                        </div>
+                        <p>
+                            <input type="submit" value="Регистрация" />
+                        </p>}
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

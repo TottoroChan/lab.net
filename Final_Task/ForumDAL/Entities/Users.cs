@@ -15,7 +15,7 @@ namespace DAL.Entities
 		public string Password { get; set; }
 		public int TypeID { get; set; }
 		public string UserType { get; set; }
-
+		public string Avatar { get; set; }
 		public Users()
 		{
 			UserID = 0;
@@ -25,6 +25,7 @@ namespace DAL.Entities
 			Password = null;
 			TypeID = 0;
 			UserType = null;
+			Avatar = null;
 		}
 
 	}
