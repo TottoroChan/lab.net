@@ -1,0 +1,84 @@
+﻿@model  List<MessagesViewModel>
+@using ForumWEB.Models
+
+@{
+    ViewBag.Title = ViewBag.TopicName;
+}
+
+<table>
+    <tbody>
+        <tr>
+            <td width="25%"></td>
+            <td width="75%"><b><font class="text">@ViewBag.TopicName</font></b></td>
+        </tr>
+        <tr>
+            <td class="user">
+                <div>
+                    <b><font class="text">@ViewBag.AuthorName</font></b><br />
+                    <div><img src="@ViewBag.Avatar" width="120" height="120"></div><br />
+                    <div><font class="text">@ViewBag.CreateDate</font></div>
+                </div>
+            </td>
+            <td class="message">
+                <div><font class="text">@ViewBag.TopicText</font></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                if (User.IsInRole("Administrator") && (@Model[i].StatusID == 0))
+                {
+                    <tr>
+                        <td >
+                            @Html.ActionLink("Сделать сообщение видимым", "ChangeMessageStatus", "Admin",
+                          new { MessageID = Model[i].MessageID, StatusID = 1, TopicID = ViewBag.TopicID }, null)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Удалить сообщение", "DropMessage", "Admin",
+                          new { MessageID = Model[i].MessageID, TopicID = ViewBag.TopicID }, null)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="user">
+                            <div>
+                                <b><font class="text">@Model[i].Name</font></b><br />
+                                <div><img src="@Model[i].Avatar" width="120" height="120"></div><br />
+                                <div><font class="text">@Model[i].SendDate</font></div>
+                            </div>
+                        </td>
+                        <td class="message">
+                            <div><font class="text">@Model[i].Text</font></div>
+                        </td>
+                    </tr>}
+                if (@Model[i].StatusID == 1)
+                {
+                    if (User.IsInRole("Administrator"))
+                    {
+                        <tr>
+                            <td >
+                                @Html.ActionLink("Сделать сообщение невидимым", "ChangeMessageStatus", "Admin",
+                                       new { MessageID = Model[i].MessageID, StatusID = 0, TopicID = ViewBag.TopicID }, null)
+
+                            </td>
+                            <td>
+                                @Html.ActionLink("Удалить сообщение", "DropMessage", "Admin",
+                                new { MessageID = Model[i].MessageID, TopicID = ViewBag.TopicID }, null)
+                            </td>
+                        </tr>}
+                    <tr>
+                        <td class="user">
+                            <div>
+                                <b><font class="text">@Model[i].Name</font></b><br />
+                                <div><img src="@Model[i].Avatar" width="120" height="120"></div><br />
+                                <div><font class="text">@Model[i].SendDate</font></div>
+                            </div>
+                        </td>
+                        <td class="message">
+                            <div><font class="text">@Model[i].Text</font></div>
+                        </td>
+                    </tr>}
+            }
+    </tbody>
+</table>

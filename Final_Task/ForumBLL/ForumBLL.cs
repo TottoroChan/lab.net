@@ -304,7 +304,7 @@ namespace BLL
 				topic.TopicText = TopicDAL.TopicText;
 				topic.Name = TopicDAL.Name;
 				topic.CreateDate = TopicDAL.CreateDate;
-				topic.Avatar = topic.Avatar;
+				topic.Avatar = TopicDAL.Avatar;
 
 				return topic;
 			}
@@ -450,6 +450,48 @@ namespace BLL
 			try
 			{
 				if (Data.ChangeMessageStatus(MessageID, StatusID) == true)
+					return true;
+				else return false;
+			}
+			catch (ArgumentException ex)
+			{
+				throw new ValidationException(ex.Message, ex.ParamName);
+			}
+		}
+
+		public bool DropMessage(int MessageID)
+		{
+			try
+			{
+				if (Data.DropMessage(MessageID) == false)
+					return true;
+				else return false;
+			}
+			catch (ArgumentException ex)
+			{
+				throw new ValidationException(ex.Message, ex.ParamName);
+			}
+		}
+
+		public bool DropTopic(int TopicID)
+		{
+			try
+			{
+				if (Data.DropTopic(TopicID) == false)
+					return true;
+				else return false;
+			}
+			catch (ArgumentException ex)
+			{
+				throw new ValidationException(ex.Message, ex.ParamName);
+			}
+		}
+
+		public bool DropSection(int SectionID)
+		{
+			try
+			{
+				if (Data.DropSection(SectionID) == false)
 					return true;
 				else return false;
 			}

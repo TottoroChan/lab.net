@@ -17,14 +17,15 @@
     @foreach (var user in Model)
     { 
         <tr class="user">
-            <td><font class="text">@user.Login</font><br />
-            <img scr="@ViewBag.Avatar" width="120" height="120" /> 
-                <br />
-                @{    if (User.IsInRole("Administrator"))
-                    {
-                        @Html.ActionLink("Изменить данные пользователя", "ChangeUserType", "Admin", new {UserID = @user.UserID}, null)
-                    }
+            <td>
+            <font class="text">@user.Login</font><br />
+            <div><img src="@user.Avatar" width="120" height="120"></div>
+            <br />
+            @{    if (User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("Изменить данные пользователя", "ChangeUserType", "Admin", new { UserID = @user.UserID }, null)
                 }
+            }
             </td>
             <td><font class="text">@user.Name</font></td>
             <td><font class="text">@user.RegistrationDate</font></td>

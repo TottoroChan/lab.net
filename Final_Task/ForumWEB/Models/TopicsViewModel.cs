@@ -26,5 +26,6 @@ namespace ForumWEB.Models
 		public string Name { get; set; }
 		public DateTime SendDate { get; set; }
 		public string Avatar { get; set; }
+		public string EmptySection { get; set; }
 	}
 }

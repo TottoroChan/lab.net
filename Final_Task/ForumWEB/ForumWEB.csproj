@@ -130,15 +130,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Topic.cshtml" />
+    <Content Include="Views\Home\MessagesList.cshtml" />
     <Content Include="Views\Home\UsersList.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Admin\ChangeUserType.cshtml" />
-    <Content Include="Views\Home\NewMessage.cshtml" />
-    <Content Include="Views\Home\NewTopic.cshtml" />
+    <Content Include="Views\Home\Topic.cshtml" />
+    <Content Include="Views\Home\TopicsList.cshtml" />
     <Content Include="Views\Admin\NewSection.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\TopicsList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

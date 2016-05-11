@@ -117,7 +117,7 @@ namespace DAL
 			{
 				var command = new SqlCommand(
 					"SELECT u.UserID, u.Login, u.Name, u.RegistrationDate," +
-					" u.TypeID, ut.UserType FROM dbo.Users as u INNER JOIN " +
+					" u.TypeID, ut.UserType, u.Avatar FROM dbo.Users as u INNER JOIN " +
 					"dbo.UserTypes as ut ON u.TypeID = ut.TypeID", connection);
 
 				connection.Open();
@@ -133,6 +133,7 @@ namespace DAL
 					user.RegistrationDate = Convert.ToDateTime(reader.GetValue(3));
 					user.TypeID = Convert.ToInt32(reader.GetValue(4));
 					user.UserType = Convert.ToString(reader.GetValue(5));
+					user.Avatar = Convert.ToString(reader.GetValue(6));
 					users.Add(user);
 				}
 				return users;
@@ -647,5 +648,68 @@ namespace DAL
 					return reader.Read();
 			}
 		}
+
+		/// <summary>
+		/// Удаление сообщения
+		/// </summary>
+		/// <param name="login"></param>
+		public bool DropMessage(int MessageID)
+		{
+			using (var connection = new SqlConnection(ConnectionString()))
+			{
+				SqlCommand command = new SqlCommand("DELETE FROM dbo.Messages WHERE MessageID = @id");
+				command.Connection = connection;
+				command.Parameters.AddWithValue("@id", MessageID);
+				connection.Open();
+				using (SqlDataReader reader = command.ExecuteReader())
+					return reader.Read();
+			}
+		}
+
+		/// <summary>
+		/// удаление темы
+		/// </summary>
+		/// <param name="login"></param>
+		public bool DropTopic(int TopicID)
+		{
+			using (var connection = new SqlConnection(ConnectionString()))
+			{
+				var allMessages = GetMessages(TopicID);
+				foreach (var m in allMessages)
+				{
+					DropMessage(m.MessageID);
+				}
+				SqlCommand command = new SqlCommand("DELETE FROM dbo.Topics WHERE TopicID = @id");
+				command.Connection = connection;
+				command.Parameters.AddWithValue("@id", TopicID);
+				connection.Open();
+				using (SqlDataReader reader = command.ExecuteReader())
+					return reader.Read();
+			}
+		}
+
+		/// <summary>
+		/// Удаление раздела
+		/// </summary>
+		/// <param name="login"></param>
+		public bool DropSection(int SectionID)
+		{
+			using (var connection = new SqlConnection(ConnectionString()))
+			{
+				var allTopics = GetTopics(SectionID);
+				foreach(var t in allTopics)
+				{
+					DropTopic(t.TopicID);
+				}
+				SqlCommand command = new SqlCommand("DELETE FROM dbo.Sections WHERE SectionID = @id");
+				command.Connection = connection;
+				command.Parameters.AddWithValue("@id", SectionID);
+				connection.Open();
+				using (SqlDataReader reader = command.ExecuteReader())
+					return reader.Read();
+			}
+		}
+
+		
 	}
 }

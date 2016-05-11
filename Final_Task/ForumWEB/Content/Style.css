@@ -41,11 +41,10 @@ tr
 }
 .message
 {
-    text-align: left;
+    float: left;
     padding: 10px;
 }
 td
 {
-    border: 1px solid #284262;
     padding: 10px;
 }

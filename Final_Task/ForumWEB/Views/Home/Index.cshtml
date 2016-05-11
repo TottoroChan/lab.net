@@ -3,43 +3,109 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (User.IsInRole("Administrator"))
+{
+    <td colspan="3"><b>@Html.ActionLink("Создать новый раздел", "NewSection", "Admin")</b></td>
+    <br/><br/>
+    @Html.Action("TopicsList", "Admin")
+}
+else
+{
+    @Html.Action("TopicsList", "Home")
+}
 
 <table>
     <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            if (i == 0)
-            {
-                <tr >
-                    <td width="55%"><font class="text">@Model[i].SectionName</font></td>
-                    <td width="5%"><font class="text">Ответов</font></td>
-                    <td width="20%"><font class="text">Тема открыта</font></td>
-                    <td width="20%"><font class="text">Последний ответ</font></td>
-                </tr>
-}
-            else if (@Model[i].SectionName != Model[i - 1].SectionName)
-            {
-                <tr>
-                    <td width="55%"><font class="text">@Model[i].SectionName</font></td>
-                    <td width="5%"><font class="text">Ответов</font></td>
-                    <td width="20%"><font class="text">Тема открыта</font></td>
-                    <td width="20%"><font class="text">Последний ответ</font></td>
-                </tr>
-}
-            <tr>
-                <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID}, null)</td>
-                <td class="user"><font class="text">@Model[i].MessageCount</font></td>
-                <td class="user"><font class="text">@Model[i].CreateDate.Day<br>@Model[i].AuthorName</font></td>
-                @if (Model[i].SendDate != DateTime.MinValue)
+        <tr>
+            <td colspan="3"><b><font class="text">Новая тема: </font></b></td>
+        </tr>
+        <tr>
+            <td width=25% class="user">
+                @if (User.IsInRole("Administrator") || User.IsInRole("Ban") || User.IsInRole("User"))
                 {
-                <td class="user"><font class="text">@Model[i].SendDate.ToShortDateString()<br>@Model[i].Name</font></td>}
+                    <div>
+                        <b><font class="text">@ViewBag.Name</font></b><br /><br />
+                        <div><img src="@ViewBag.Avatar" width="120" height="120"></div>
+                    </div>}
                 else
                 {
-                    <td class="user"><font class="text">В теме ещё нет сообщений.</font></td>}
-            </tr>
-        }
+                    <div>
+                        <b><font class="text">Гость</font></b><br /><br />
+                        <div><img src="http://mydermatolog.ru/sites/default/files/pictures/userdef.jpg" width="120" height="120"></div>
+                    </div>}
+            </td>
+            <td>
+                <div class="textbox">
+                    <form action="/Home/Index" method="post">
+                        @if (User.IsInRole("Administrator") || (User.IsInRole("User")))
+                        {
+                            <input type="hidden" value="@ViewBag.UserID" name="UserID" />
+                            <select name="SectionID">
+                                @for (int i = 0; i < ViewBag.SectionID.Length; i++)
+                                {
+                                    <option value="@ViewBag.SectionID[i]">@ViewBag.SectionName[i]</option>}
+                            </select>
+                            <br /><br />
+                            <div>
+                                <font class="text">Название</font>
+                            </div>
+                            <div>
+                                <input name="TopicName" type="text" value="@ViewBag.TopicName" />
+                            </div>
+                            <br />
+                            <div>
+                                <font class="text">Сообщение</font>
+                            </div>
+                            <div>
+                                <textarea name="TopicText" cols="56" rows="8">@ViewBag.TopicText</textarea>
+                            </div>
+                            <p>
+                                <input type="submit" value="Отправить" />
+                            </p>}
+                        else
+                        {
+                            <select name="SectionID" disabled>
+                                @for (int i = 0; i < ViewBag.SectionID.Length; i++)
+                                {
+                                    <option value="@ViewBag.SectionID[i]">@ViewBag.SectionName[i]</option>}
+                            </select>
+                            <br /><br />
+                            <div>
+                                <font class="text">Название</font>
+                            </div>
+                            <div>
+                                <input name="TopicName" type="text" disabled />
+                            </div>
+                            <br />
+                            <div>
+                                <font class="text">Сообщение</font>
+                            </div>
+                            <div>
+                                @if (User.IsInRole("Ban"))
+                                {
+                                    <textarea name="TopicText" cols="56" rows="8" disabled
+                                              placeholder="Ваш  аккаунт забанен и вы не можете создавать темы на форуме."></textarea>}
+                                else
+                                {
+                                    <textarea name="Text" cols="56" rows="8" disabled
+                                              placeholder="Вы не можете создавать темы на форуме. Войдте или зарегистрируйтесь."></textarea>
+}
+                            </div>
+                            <p>
+                                <input type="submit" value="Отправить" disabled />
+                            </p>}
+                    </form>
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>
-
-@Html.Partial("NewTopic", new { SectionID = ViewBag.SectionID, SectionName = ViewBag.SectionName })

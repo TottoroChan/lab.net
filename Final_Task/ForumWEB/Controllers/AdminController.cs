@@ -16,51 +16,54 @@ namespace ForumWEB.Controllers
 		// GET: Admin
 
 		/// <summary>
-		/// Главная страница форума со списком разделов и тем
+		/// Список тем на форуме
 		/// </summary>
 		/// <param name=""></param>
-		public ActionResult Index()
+		public ActionResult TopicsList()
 		{
 			try
 			{
 				List<TopicsViewModel> topics = new List<TopicsViewModel>();
 				var SectionsBLL = Data.GetSections();
-
-				int length = SectionsBLL.Count();
-				ViewBag.SectionID = new int[length];
-				ViewBag.SectionName = new string[length];
-
-				for (int i = 0; i < length; i++)
+				ViewBag.EmptySection = new string[SectionsBLL.Count()];
+				foreach (var s in SectionsBLL)
 				{
-					ViewBag.SectionID[i] = SectionsBLL.ElementAt(i).SectionID;
-					ViewBag.SectionName[i] = SectionsBLL.ElementAt(i).SectionName;
-
-					var TopicsBLL = Data.GetTopicsForAdmin(SectionsBLL.ElementAt(i).SectionID);
-					foreach (var t in TopicsBLL)
+					var TopicsBLL = Data.GetTopicsForAdmin(s.SectionID);
+					if (TopicsBLL.Count() == 0)
 					{
 						TopicsViewModel topic = new TopicsViewModel();
-						topic.SectionName = ViewBag.SectionName[i];
-						topic.TopicID = t.TopicID;
-						topic.TopicName = t.TopicName;
-						topic.AuthorName = t.Name;
-						topic.CreateDate = t.CreateDate;
-						topic.MessageCount = t.MessageCount;
-						var u = Data.LastMessageForAdmin(t.TopicID);
-						topic.Name = u.Name;
-						topic.SendDate = u.RegistrationDate;
+						topic.SectionID = s.SectionID;
+						topic.SectionName = s.SectionName;
+						topic.EmptySection = "В разделе ещё нет тем";
 						topics.Add(topic);
 					}
-
+					else
+					{
+						foreach (var t in TopicsBLL)
+						{
+							TopicsViewModel topic = new TopicsViewModel();
+							topic.SectionID = s.SectionID;
+							topic.SectionName = s.SectionName;
+							topic.TopicID = t.TopicID;
+							topic.TopicName = t.TopicName;
+							topic.AuthorName = t.Name;
+							topic.CreateDate = t.CreateDate;
+							topic.MessageCount = t.MessageCount;
+							var u = Data.LastMessageForAdmin(t.TopicID);
+							topic.Name = u.Name;
+							topic.SendDate = u.RegistrationDate;
+							topics.Add(topic);
+						}
+					}
 				}
-
-				return View(topics);
+				return PartialView(topics);
 			}
 			catch (ValidationException ex)
 			{
-				ModelState.AddModelError("DalError", ex.Message);
-				return RedirectToAction("Index");
+				return Content(ex.Message);
 			}
 		}
+
 		/// <summary>
 		/// Создание нового раздела
 		/// </summary>
@@ -70,12 +73,11 @@ namespace ForumWEB.Controllers
 			try
 			{
 				ViewBag.SectionName = null;
-				return PartialView();
+				return View();
 			}
 			catch (ValidationException ex)
 			{
-				ModelState.AddModelError("DalError", ex.Message);
-				return View("Index");
+				return Content(ex.Message);
 			}
 		}
 
@@ -92,7 +94,7 @@ namespace ForumWEB.Controllers
 				{
 					Data.CreateSection(sectionName);
 
-					return RedirectToAction("Index");
+					return RedirectToAction("Index", "Home");
 				}
 
 				else
@@ -103,8 +105,7 @@ namespace ForumWEB.Controllers
 			}
 			catch (ValidationException ex)
 			{
-				ModelState.AddModelError("DalError", ex.Message);
-				return RedirectToAction("Index");
+				return Content(ex.Message);
 			}
 		}
 
@@ -122,7 +123,6 @@ namespace ForumWEB.Controllers
 				user.Login = UserBLL.Login;
 				user.Password = UserBLL.Password;
 				user.Name = UserBLL.Name;
-				user.Avatar = UserBLL.Avatar;
 				user.RegistrationDate = UserBLL.RegistrationDate;
 				user.TypeID = UserBLL.TypeID;
 				user.UserType = UserBLL.UserType;
@@ -155,6 +155,7 @@ namespace ForumWEB.Controllers
 					UserBLL.Password = user.Password;
 					UserBLL.UserID = user.UserID;
 					UserBLL.TypeID = user.TypeID;
+					UserBLL.Avatar = user.Avatar;
 					UserBLL.RegistrationDate = user.RegistrationDate;
 					Data.ChangeUserType(UserBLL);
 
@@ -181,14 +182,51 @@ namespace ForumWEB.Controllers
 			try
 			{
 				Data.ChangeMessageStatus(MessageID, StatusID);
-				return RedirectToAction("Topic", new { TopicID = TopicID });
+				return RedirectToAction("Topic", "Home", new { TopicID = TopicID });
 			}
 			catch (ValidationException ex)
 			{
-				ModelState.AddModelError("DalError", ex.Message);
-				return RedirectToAction("Topic", new { TopicID = TopicID });
+				return Content(ex.Message);
+			}
+		}
+		
+		public ActionResult DropSection(int SectionID)
+		{
+			try
+			{
+				Data.DropSection(SectionID);
+				return RedirectToAction("Index", "Home");
+			}
+			catch (ValidationException ex)
+			{
+				return Content(ex.Message);
 			}
 		}
 
+		public ActionResult DropTopic(int TopicID)
+		{
+			try
+			{
+				Data.DropTopic(TopicID);
+				return RedirectToAction("Index", "Home");
+			}
+			catch (ValidationException ex)
+			{
+				return Content(ex.Message);
+			}
+		}
+
+		public ActionResult DropMessage(int MessageID,int TopicID)
+		{
+			try
+			{
+				Data.DropMessage(MessageID);
+				return RedirectToAction("Topic", "Home", new { TopicID = TopicID });
+			}
+			catch (ValidationException ex)
+			{
+				return Content(ex.Message);
+			}
+		}
 	}
 }

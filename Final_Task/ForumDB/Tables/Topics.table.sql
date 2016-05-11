@@ -6,7 +6,5 @@
     [TopicText] NVARCHAR(MAX) NOT NULL, 
     [UserID] INT NOT NULL, 
     [CreateDate] DATETIME NOT NULL, 
-    PRIMARY KEY ([TopicID]), 
-    CONSTRAINT [FK_Topics_Sections] FOREIGN KEY (SectionID) REFERENCES Sections(SectionID), 
-    CONSTRAINT [FK_Topics_Users] FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    PRIMARY KEY ([TopicID])
 )

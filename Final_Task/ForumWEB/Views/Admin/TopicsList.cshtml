@@ -1,0 +1,49 @@
+﻿@using ForumWEB.Models
+@model List<TopicsViewModel>
+@{
+    ViewBag.Title = "NewTopic";
+}
+
+<table>
+    <tbody>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        if (i == 0)
+        {
+            <tr>
+                <td width="40%"><font class="text">@Model[i].SectionName</font></td>
+                <td width="15%">@Html.ActionLink("Удалить раздел", "DropSection", "Admin", new { SectionID = Model[i].SectionID }, null)</td>
+                <td width="5%"><font class="text">Ответов</font></td>
+                <td width="20%"><font class="text">Тема открыта</font></td>
+                <td width="20%"><font class="text">Последний ответ</font></td>
+            </tr>}
+        else if (@Model[i].SectionName != Model[i - 1].SectionName)
+        {
+            <tr>
+                <td width="40%"><font class="text">@Model[i].SectionName</font></td>
+                <td width="15%">@Html.ActionLink("Удалить раздел", "DropSection", "Admin", new { SectionID = Model[i].SectionID }, null)</td>
+                <td width="5%"><font class="text">Ответов</font></td>
+                <td width="20%"><font class="text">Тема открыта</font></td>
+                <td width="20%"><font class="text">Последний ответ</font></td>
+            </tr>}
+
+            if (Model[i].EmptySection == null)
+            {
+            <tr>
+                <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID }, null)</td>
+                <td width="15%">@Html.ActionLink("Удалить тему", "DropTopic", "Admin", new { TopicID = Model[i].TopicID }, null)</td>
+                <td class="user"><font class="text">@Model[i].MessageCount</font></td>
+                <td class="user"><font class="text">@Model[i].CreateDate.ToShortDateString()<br>@Model[i].AuthorName</font></td>
+                @if (Model[i].SendDate != DateTime.MinValue)
+                {
+                    <td class="user"><font class="text">@Model[i].SendDate.ToShortDateString()<br>@Model[i].Name</font></td>}
+                else
+                {
+                    <td class="user"><font class="text">В теме ещё нет сообщений.</font></td>}
+            </tr>}
+            else
+            {
+                <tr><td colspan="5">@Model[i].EmptySection</td></tr>}
+    }
+    </tbody>
+</table>
