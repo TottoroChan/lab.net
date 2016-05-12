@@ -10,7 +10,9 @@
 <table >
     <tbody>
         <tr >
-            <td colspan="3"><b><font class="text">Новое сообщение: </font></b></td>
+            <td colspan="3" class="user">
+                <font class="text">После отправки ваше сообщение отправится на модерацию. Оно появится в теме, как только будет одобрено администратором.</font>
+            </td>
         </tr>
         <tr >
             <td width=25% class="user">
@@ -32,7 +34,7 @@
                 <div class="textbox">
                     <form action="/Home/Topic" method="post">
                             <div>
-                                <font class="text">Сообщение</font>
+                                <font class="text">Сообщение:</font>
                             </div>
                             @if (User.IsInRole("Administrator") || (User.IsInRole("User")))
                             {

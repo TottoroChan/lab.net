@@ -499,14 +499,30 @@ namespace DAL
 		{
 			using(var connection = new SqlConnection(ConnectionString()))
             {
-				var command = new SqlCommand(
-				"INSERT INTO dbo.Messages (TopicID, Text, SendDate,UserID) " +
-				"VALUES (@TopicID, @Text, @SendDate, @UserID)", connection);															
-				
-				command.Parameters.AddWithValue("@TopicID", message.TopicID);
-				command.Parameters.AddWithValue("@Text", message.Text);
-				command.Parameters.AddWithValue("@SendDate", message.SendDate);
-				command.Parameters.AddWithValue("@UserID", message.UserID);
+				var command = new SqlCommand();
+				if (message.StatusID == 0)
+				{
+					command = new SqlCommand(
+					"INSERT INTO dbo.Messages (TopicID, Text, SendDate,UserID) " +
+					"VALUES (@TopicID, @Text, @SendDate, @UserID)", connection);
+
+					command.Parameters.AddWithValue("@TopicID", message.TopicID);
+					command.Parameters.AddWithValue("@Text", message.Text);
+					command.Parameters.AddWithValue("@SendDate", message.SendDate);
+					command.Parameters.AddWithValue("@UserID", message.UserID);
+				}
+				else
+				{
+					command = new SqlCommand(
+					"INSERT INTO dbo.Messages (TopicID, Text, SendDate,UserID,StatusID) " +
+					"VALUES (@TopicID, @Text, @SendDate, @UserID, @StatusID)", connection);
+
+					command.Parameters.AddWithValue("@TopicID", message.TopicID);
+					command.Parameters.AddWithValue("@Text", message.Text);
+					command.Parameters.AddWithValue("@SendDate", message.SendDate);
+					command.Parameters.AddWithValue("@UserID", message.UserID);
+					command.Parameters.AddWithValue("@StatusID", message.StatusID);
+				}
 				connection.Open();
 				return command.ExecuteNonQuery() == 1;
 			}
@@ -544,7 +560,7 @@ namespace DAL
 				var command = new SqlCommand(
 					"UPDATE dbo.Users SET Login = @Login, Password = @Password, " +
 					"Name = @Name, RegistrationDate = @RegistrationDate, " +
-					"TypeID = @TypeID, @Avatar = Avatar WHERE UserID = @UserID", connection);
+					"TypeID = @TypeID, Avatar = @Avatar WHERE UserID = @UserID", connection);
 
 				command.Parameters.AddWithValue("@Login", user.Login);
 				command.Parameters.AddWithValue("@Password", user.Password);

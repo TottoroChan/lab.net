@@ -31,7 +31,7 @@
             {
             <tr>
                 <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID }, null)<br/>
-                <font class="text">Новых сообщений в теме: @Model[i].InvisibleMessages</font></td>
+                <font class="text">Сообщения, ожидающие модерацию: @Model[i].InvisibleMessages</font></td>
                 <td width="15%">@Html.ActionLink("Удалить тему", "DropTopic", "Admin", new { TopicID = Model[i].TopicID }, null)</td>
                 <td class="user"><font class="text">@Model[i].MessageCount</font></td>
                 <td class="user"><font class="text">@Model[i].CreateDate.ToShortDateString()<br>@Model[i].AuthorName</font></td>

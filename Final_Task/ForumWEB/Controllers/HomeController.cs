@@ -237,6 +237,10 @@ namespace ForumWEB.Controllers
 						MessageBLL.TopicID = newMessage.TopicID;
 						MessageBLL.Text = newMessage.Text;
 						MessageBLL.UserID = newMessage.UserID;
+						if(User.IsInRole("Administrator"))
+                        {
+							MessageBLL.StatusID = 1;
+						}
 						Data.CreateMessage(MessageBLL);
 
 						return RedirectToAction("Topic", new { TopicID = newMessage.TopicID });

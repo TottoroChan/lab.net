@@ -385,6 +385,7 @@ namespace BLL
 				MessageDAL.Text = message.Text;
 				MessageDAL.SendDate = DateTime.Now;
 				MessageDAL.UserID = message.UserID;
+				MessageDAL.StatusID = message.StatusID;
 
 				if (Data.CreateMessage(MessageDAL) == true)
 					return true;

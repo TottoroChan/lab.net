@@ -29,7 +29,7 @@
                 <tr>
                     <td>@Html.ActionLink(Model[i].TopicName, "Topic", "Home", new { TopicID = Model[i].TopicID }, null)</td>
                     <td class="user"><font class="text">@Model[i].MessageCount</font></td>
-                    <td class="user"><font class="text">@Model[i].CreateDate.Day<br>@Model[i].AuthorName</font></td>
+                    <td class="user"><font class="text">@Model[i].CreateDate.ToShortDateString()<br>@Model[i].AuthorName</font></td>
                     @if (Model[i].SendDate != DateTime.MinValue)
                     {
                         <td class="user"><font class="text">@Model[i].SendDate.ToShortDateString()<br>@Model[i].Name</font></td>}

@@ -41,7 +41,7 @@ else
                         @if (User.IsInRole("Administrator") || (User.IsInRole("User")))
                         {
                             <input type="hidden" value="@ViewBag.UserID" name="UserID" />
-                            <select name="SectionID">
+                            <select name="SectionID" style="width: 100%">
                                 @for (int i = 0; i < ViewBag.SectionID.Length; i++)
                                 {
                                     <option value="@ViewBag.SectionID[i]">@ViewBag.SectionName[i]</option>}
@@ -51,7 +51,7 @@ else
                                 <font class="text">Название</font>
                             </div>
                             <div>
-                                <input name="TopicName" type="text" value="@ViewBag.TopicName" />
+                                <input name="TopicName" style="width: 100%" type="text" value="@ViewBag.TopicName" />
                             </div>
                             <br />
                             <div>
@@ -65,7 +65,7 @@ else
                             </p>}
                         else
                         {
-                            <select name="SectionID" disabled>
+                            <select name="SectionID" style="width: 100%" disabled>
                                 @for (int i = 0; i < ViewBag.SectionID.Length; i++)
                                 {
                                     <option value="@ViewBag.SectionID[i]">@ViewBag.SectionName[i]</option>}
@@ -75,7 +75,7 @@ else
                                 <font class="text">Название</font>
                             </div>
                             <div>
-                                <input name="TopicName" type="text" disabled />
+                                <input name="TopicName" type="text" style="width: 100%" disabled />
                             </div>
                             <br />
                             <div>

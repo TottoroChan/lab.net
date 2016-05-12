@@ -132,6 +132,7 @@ namespace ForumWEB.Controllers
 				user.RegistrationDate = UserBLL.RegistrationDate;
 				user.TypeID = UserBLL.TypeID;
 				user.UserType = UserBLL.UserType;
+				user.Avatar = UserBLL.Avatar;
 
 				return View(user);
 			}
@@ -165,7 +166,7 @@ namespace ForumWEB.Controllers
 					UserBLL.RegistrationDate = user.RegistrationDate;
 					Data.ChangeUserType(UserBLL);
 
-					return RedirectToAction("Index");
+					return RedirectToAction("UsersList", "Home");
 				}
 
 				else return View(user);
