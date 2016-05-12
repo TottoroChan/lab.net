@@ -500,5 +500,19 @@ namespace BLL
 				throw new ValidationException(ex.Message, ex.ParamName);
 			}
 		}
+
+		public bool ChangeAvatar(int UserID, string Avatar)
+		{
+			try
+			{
+				if (Data.ChangeAvatar(UserID, Avatar) == false)
+					return true;
+				else return false;
+			}
+			catch (ArgumentException ex)
+			{
+				throw new ValidationException(ex.Message, ex.ParamName);
+			}
+		}
 	}
 }

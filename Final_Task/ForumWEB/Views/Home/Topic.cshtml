@@ -18,7 +18,8 @@
                 {
                     <div>
                         <b><font class="text">@ViewBag.Name</font></b><br /><br />
-                        <div><img src="@ViewBag.Avatar" width="120" height="120"></div>
+                        <div><img src="@ViewBag.Avatar" width="120" height="120"></div><br />
+                        <div>@Html.ActionLink("Изменить аватар", "ChangeAvatar", "Home", new { UserID = ViewBag.UserID }, null)</div>
                     </div>}
                 else
                 {

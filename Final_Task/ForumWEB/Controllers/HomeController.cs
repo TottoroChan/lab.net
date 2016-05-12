@@ -347,6 +347,57 @@ namespace ForumWEB.Controllers
 					return View(user);
 				}
 			}
+
+			/// <summary>
+			/// Регистрация
+			/// </summary>
+			/// <param name=""></param>
+			public ActionResult ChangeAvatar(int UserID)
+			{
+				try
+				{
+					ViewBag.UserID = UserID;
+					var curentUser = Data.GetCurentUser(User.Identity.Name);
+					ViewBag.Avatar = curentUser.Avatar;
+					ViewBag.Name = curentUser.Name;
+					return View();
+				}
+				catch (ValidationException ex)
+				{
+					return Content(ex.Message);
+				}
+			}
+
+			/// <summary>
+			/// Приём данных со страницы регистрации
+			/// </summary>
+			/// <param name="user"></param>
+			[HttpPost]
+			public ActionResult ChangeAvatar(int UserID, string Avatar)
+			{
+				try
+				{
+					if (Avatar != "")
+					{
+						Data.ChangeAvatar(UserID, Avatar);
+
+						return RedirectToAction("Index");
+					}
+
+					else
+					{
+						ModelState.AddModelError("Error", "Вы не ввели url аватара.");
+						ViewBag.UserID = UserID;
+						return View();
+					}
+				}
+				catch (ValidationException ex)
+				{
+					ModelState.AddModelError("DalError", ex.Message);
+					ViewBag.UserID = UserID;
+					return View(UserID);
+				}
+			}
 		}
 	}
 }

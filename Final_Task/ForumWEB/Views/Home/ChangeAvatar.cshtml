@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "ChangeAvatar";
+}
+
+<table>
+    <tbody>
+        <tr>
+            <td colspan="3"><b><font class="text">Изменить аватар: </font></b></td>
+        </tr>
+        <tr>
+            <td width=25% class="user">
+                @if (User.IsInRole("Administrator") || User.IsInRole("Ban") || User.IsInRole("User"))
+                {
+                    <div>
+                        <b><font class="text">@ViewBag.Name</font></b><br /><br />
+                        <div><img src="@ViewBag.Avatar" width="120" height="120"></div>
+                    </div>}
+                else
+                {
+                    <div>
+                        <b><font class="text">Гость</font></b><br /><br />
+                        <div><img src="http://mydermatolog.ru/sites/default/files/pictures/userdef.jpg" width="120" height="120"></div>
+                    </div>}
+            </td>
+            <td>
+                <div class="textbox">
+                    <form action="/Home/ChangeAvatar" method="post">
+                        <div>
+                            <font class="text">URL нового аватара: </font>
+                        </div><br/>
+                            <input type="hidden" name="UserID" value="@ViewBag.UserID">
+                            <div>
+                                <input name="Avatar" value="@ViewBag.Avatar">&nbsp;&nbsp;&nbsp;<input type="submit" value="Отправить"/>
+                            </div>
+                    </form>
+                </div>
+            </td>
+            <td width=25%>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        <font class="text">
+                            @Html.ValidationSummary()
+                        </font>}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

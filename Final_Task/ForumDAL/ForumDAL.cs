@@ -30,17 +30,34 @@ namespace DAL
 
 			using (var connection = new SqlConnection(ConnectionString()))
 			{
-				var command = new SqlCommand(
-				"INSERT INTO dbo.Users (Name, Login, Password," +
-				"RegistrationDate, Avatar) VALUES (@Name, @Login," +
-				" @Password, @RegistrationDate, @Avatar)", connection);
+				var command = new SqlCommand();
+                if (user.Avatar != null)
+				{
+					command = new SqlCommand(
+					"INSERT INTO dbo.Users (Name, Login, Password," +
+					"RegistrationDate, Avatar) VALUES (@Name, @Login," +
+					" @Password, @RegistrationDate, @Avatar)", connection);
 
-				command.Parameters.AddWithValue("@Name", user.Name);
-				command.Parameters.AddWithValue("@Login", user.Login);
-				command.Parameters.AddWithValue("@Password", user.Password);
-				command.Parameters.AddWithValue("@RegistrationDate",
-												user.RegistrationDate);
-				command.Parameters.AddWithValue("@Avatar", user.Avatar);
+					command.Parameters.AddWithValue("@Name", user.Name);
+					command.Parameters.AddWithValue("@Login", user.Login);
+					command.Parameters.AddWithValue("@Password", user.Password);
+					command.Parameters.AddWithValue("@RegistrationDate",
+													user.RegistrationDate);
+					command.Parameters.AddWithValue("@Avatar", user.Avatar);
+				}
+				else
+				{
+					command = new SqlCommand(
+					"INSERT INTO dbo.Users (Name, Login, Password," +
+					"RegistrationDate) VALUES (@Name, @Login," +
+					" @Password, @RegistrationDate)", connection);
+
+					command.Parameters.AddWithValue("@Name", user.Name);
+					command.Parameters.AddWithValue("@Login", user.Login);
+					command.Parameters.AddWithValue("@Password", user.Password);
+					command.Parameters.AddWithValue("@RegistrationDate",
+													user.RegistrationDate);
+				}
 				connection.Open();
 				return command.ExecuteNonQuery() == 1;
 			}
@@ -710,6 +727,24 @@ namespace DAL
 			}
 		}
 
-		
+		/// <summary>
+		/// Изменение аватара пользователя
+		/// </summary>
+		/// <param name="UserID"></param>
+		/// <param name="Avatar"></param>
+		public bool ChangeAvatar(int UserID, string Avatar)
+		{
+			using (var connection = new SqlConnection(ConnectionString()))
+			{
+				var command = new SqlCommand(
+					"UPDATE dbo.Users SET Avatar = '"+Avatar+"' WHERE " +
+					"UserID = @id", connection);
+				command.Connection = connection;
+				command.Parameters.AddWithValue("@id", UserID);
+				connection.Open();
+				using (SqlDataReader reader = command.ExecuteReader())
+					return reader.Read();
+			}
+		}
 	}
 }

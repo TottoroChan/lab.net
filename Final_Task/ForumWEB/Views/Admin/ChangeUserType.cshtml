@@ -39,12 +39,6 @@
                                 @Html.EditorFor(model => model.Avatar)
                             </div>
                             <div>
-                                <font class="text">Дата регистрации</font>
-                            </div>
-                            <div>
-                                @Html.EditorFor(model => model.RegistrationDate)
-                            </div>
-                            <div>
                                 <font class="text">Права</font>
                             </div>
                             <div>
@@ -53,6 +47,9 @@
                                     <option value="2">Пользователь</option>
                                     <option value="0">Забанить</option>
                                 </select>
+                            </div>
+                            <div>
+                                <input type="hidden" name="RegistrationDate" value="@Model.TopicID">
                             </div>
                             <p>
                                 <input type="submit" value="Сохранить" />

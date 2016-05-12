@@ -10,7 +10,7 @@
         {
             if (i == 0)
             {
-                <tr>
+                <tr style="background-color: #425061">
                     <td width="55%"><font class="text">@Model[i].SectionName</font></td>
                     <td width="5%"><font class="text">Ответов</font></td>
                     <td width="20%"><font class="text">Тема открыта</font></td>
@@ -18,7 +18,7 @@
                 </tr>}
             else if (@Model[i].SectionName != Model[i - 1].SectionName)
             {
-                <tr>
+                <tr style="background-color: #425061">
                     <td width="55%"><font class="text">@Model[i].SectionName</font></td>
                     <td width="5%"><font class="text">Ответов</font></td>
                     <td width="20%"><font class="text">Тема открыта</font></td>

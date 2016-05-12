@@ -52,6 +52,12 @@ namespace ForumWEB.Controllers
 							var u = Data.LastMessageForAdmin(t.TopicID);
 							topic.Name = u.Name;
 							topic.SendDate = u.RegistrationDate;
+							var messages = Data.GetMessages(t.TopicID);
+							foreach (var m in messages)
+							{
+								if (m.StatusID == 0)
+									topic.InvisibleMessages++;
+							}
 							topics.Add(topic);
 						}
 					}

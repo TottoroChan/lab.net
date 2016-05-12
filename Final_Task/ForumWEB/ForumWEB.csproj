@@ -139,6 +139,7 @@
     <Content Include="Views\Home\TopicsList.cshtml" />
     <Content Include="Views\Admin\NewSection.cshtml" />
     <Content Include="Views\Admin\TopicsList.cshtml" />
+    <Content Include="Views\Home\ChangeAvatar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
