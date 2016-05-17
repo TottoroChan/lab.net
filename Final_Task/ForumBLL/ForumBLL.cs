@@ -32,7 +32,7 @@ namespace BLL
 
 				if (Data.Registration(UserDAL) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -51,7 +51,7 @@ namespace BLL
 			{
 				if (Data.Login(Login, Password) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан","");
 			}
 			catch (ArgumentException ex)
 			{
@@ -364,7 +364,7 @@ namespace BLL
 
 				if (Data.CreateTopic(TopicDAL) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -389,7 +389,7 @@ namespace BLL
 
 				if (Data.CreateMessage(MessageDAL) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -407,7 +407,7 @@ namespace BLL
 			{
 				if (Data.CreateSection(sectionName) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -433,7 +433,7 @@ namespace BLL
 				userDAL.Avatar = user.Avatar;
 				if (Data.ChangeUserType(userDAL) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -452,7 +452,7 @@ namespace BLL
 			{
 				if (Data.ChangeMessageStatus(MessageID, StatusID) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -464,9 +464,9 @@ namespace BLL
 		{
 			try
 			{
-				if (Data.DropMessage(MessageID) == false)
+				if (Data.DropMessage(MessageID) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -478,9 +478,9 @@ namespace BLL
 		{
 			try
 			{
-				if (Data.DropTopic(TopicID) == false)
+				if (Data.DropTopic(TopicID) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -492,9 +492,9 @@ namespace BLL
 		{
 			try
 			{
-				if (Data.DropSection(SectionID) == false)
+				if (Data.DropSection(SectionID) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{
@@ -506,9 +506,9 @@ namespace BLL
 		{
 			try
 			{
-				if (Data.ChangeAvatar(UserID, Avatar) == false)
+				if (Data.ChangeAvatar(UserID, Avatar) == true)
 					return true;
-				else return false;
+				else throw new ValidationException("Ваш запрос не был обработан", "");
 			}
 			catch (ArgumentException ex)
 			{

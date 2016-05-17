@@ -26,7 +26,7 @@
                     @Html.ActionLink("Изменить данные пользователя", "ChangeUserType", "Admin", new { UserID = user.UserID }, null)
                 }
 
-                if (@user.Name == User.Identity.Name)
+                if (@user.Login == User.Identity.Name)
                 {
                     <div>@Html.ActionLink("Изменить аватар", "ChangeAvatar", "Home", new { UserID = user.UserID }, null)</div>
                 }

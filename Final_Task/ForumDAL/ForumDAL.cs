@@ -694,8 +694,7 @@ namespace DAL
 				command.Connection = connection;
 				command.Parameters.AddWithValue("@id", MessageID);
 				connection.Open();
-				using (SqlDataReader reader = command.ExecuteReader())
-					return reader.Read();
+				return command.ExecuteNonQuery() == 1;
 			}
 		}
 
@@ -716,8 +715,7 @@ namespace DAL
 				command.Connection = connection;
 				command.Parameters.AddWithValue("@id", TopicID);
 				connection.Open();
-				using (SqlDataReader reader = command.ExecuteReader())
-					return reader.Read();
+				return command.ExecuteNonQuery() == 1;
 			}
 		}
 
@@ -738,8 +736,7 @@ namespace DAL
 				command.Connection = connection;
 				command.Parameters.AddWithValue("@id", SectionID);
 				connection.Open();
-				using (SqlDataReader reader = command.ExecuteReader())
-					return reader.Read();
+				return command.ExecuteNonQuery() == 1;
 			}
 		}
 
@@ -758,8 +755,7 @@ namespace DAL
 				command.Connection = connection;
 				command.Parameters.AddWithValue("@id", UserID);
 				connection.Open();
-				using (SqlDataReader reader = command.ExecuteReader())
-					return reader.Read();
+				return command.ExecuteNonQuery() == 1;
 			}
 		}
 	}
